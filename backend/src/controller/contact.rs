@@ -23,7 +23,7 @@ pub async fn get_contacts(data: web::Data<AppState>) -> impl Responder {
     println!("hello in bla");
     let query_result: sqlx::Result<Vec<ContactEntity>> = sqlx::query_as!(
         ContactEntity,
-        "SELECT id, first_name, last_name, phone, email FROM contacts"
+        "SELECT id, first_name, last_name, phone, email, birthday, additional_data FROM contacts"
     )
     .fetch_all(&data.db)
     .await;
@@ -39,7 +39,7 @@ pub async fn get_contact(path: web::Path<i32>, data: web::Data<AppState>) -> imp
     let id = path.into_inner();
     let query_result: sqlx::Result<ContactEntity> = sqlx::query_as!(
         ContactEntity,
-        "SELECT id, first_name, last_name, phone, email FROM contacts WHERE id = $1",
+        "SELECT id, first_name, last_name, phone, email, birthday, additional_data FROM contacts WHERE id = $1",
         id
     )
     .fetch_one(&data.db)
@@ -58,11 +58,13 @@ pub async fn add_contact(
 ) -> impl Responder {
     let query_result: sqlx::Result<ContactEntity> = sqlx::query_as!(
         ContactEntity, 
-        "INSERT INTO contacts (first_name, last_name, phone, email) VALUES ($1, $2, $3, $4) RETURNING id, first_name, last_name, phone, email", 
+        "INSERT INTO contacts (first_name, last_name, phone, email, birthday, additional_data) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, first_name, last_name, phone, email, birthday, additional_data", 
         body.first_name, 
         body.last_name, 
         body.phone, 
-        body.email
+        body.email,
+        body.birthday,
+        body.additional_data
     )
     .fetch_one(&data.db)
     .await;
@@ -78,11 +80,13 @@ pub async fn update_contact(body: web::Json<UpdateContactRequest>, path: web::Pa
     let id = path.into_inner();
     let query_result: sqlx::Result<ContactEntity> = sqlx::query_as!(
         ContactEntity, 
-        "UPDATE contacts SET (first_name, last_name, phone, email) = ($1, $2, $3, $4) WHERE id = $5 RETURNING id, first_name, last_name, phone, email",
+        "UPDATE contacts SET (first_name, last_name, phone, email, birthday, additional_data) = ($1, $2, $3, $4, $5, $6) WHERE id = $7 RETURNING id, first_name, last_name, phone, email, birthday, additional_data",
         body.first_name,
         body.last_name,
         body.phone,
         body.email,
+        body.birthday,
+        body.additional_data,
         id
     )
     .fetch_one(&data.db)
@@ -99,7 +103,7 @@ pub async fn delete_contact(path: web::Path<i32>, data: web::Data<AppState>) -> 
     let id = path.into_inner();
     let query_result: sqlx::Result<ContactEntity> = sqlx::query_as!(
         ContactEntity,
-        "DELETE FROM contacts WHERE id = $1 RETURNING id, first_name, last_name, phone, email",
+        "DELETE FROM contacts WHERE id = $1 RETURNING id, first_name, last_name, phone, email, birthday, additional_data",
         id
     )
     .fetch_one(&data.db)
@@ -117,6 +121,8 @@ pub struct AddContactRequest {
     last_name: Option<String>,
     phone: Option<String>,
     email: Option<String>,
+    birthday: Option<String>,
+    additional_data: Option<String>,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -125,4 +131,6 @@ pub struct UpdateContactRequest {
     last_name: Option<String>,
     phone: Option<String>,
     email: Option<String>,
+    birthday: Option<String>,
+    additional_data: Option<String>,
 }
