@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 
 type TAddDialogTextField = {
   label: string;
+  value?: string;
   setContent: (e: any) => void;
 };
 
@@ -12,6 +13,7 @@ export const AddDialogTextField = (props: TAddDialogTextField) => {
       label={props.label}
       style={{ marginTop: 10 }}
       onChange={props.setContent}
-    ></TextField>
+      value={props.value ?? ""}
+    />
   );
 };

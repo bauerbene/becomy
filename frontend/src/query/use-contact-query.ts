@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-type TContactsResponse = {
+export type TContactsResponse = {
   id: number;
   first_name: string;
   last_name: string;
