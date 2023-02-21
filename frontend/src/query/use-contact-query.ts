@@ -6,6 +6,8 @@ type TContactsResponse = {
   last_name: string;
   phone: string;
   email: string;
+  birthday: string;
+  additional_data: string;
 };
 
 export const useContactQuery = () => {

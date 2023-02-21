@@ -10,6 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { ContactListItemHeader } from "./contact-list-item-header";
 
 type TContactListItemProps = {
@@ -50,7 +51,7 @@ export const ContactListItem = (props: TContactListItemProps) => {
         <Box marginTop={1} display="flex" justifyContent="flex-end">
           <Button variant="contained">edit</Button>
         </Box>
-        <ReactMarkdown>{props.data}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{props.data}</ReactMarkdown>
       </AccordionDetails>
     </Accordion>
   );

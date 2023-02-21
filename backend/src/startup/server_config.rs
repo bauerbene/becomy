@@ -17,7 +17,11 @@ where
 {
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("debug"));
     HttpServer::new(move || {
-        let cors = Cors::default().allowed_origin("http://localhost:5173");
+        let cors = Cors::default()
+            .allowed_origin("http://localhost:5173")
+            .allow_any_method()
+            .allow_any_header()
+            .supports_credentials();
         App::new()
             .wrap(cors)
             .wrap(Logger::default())
