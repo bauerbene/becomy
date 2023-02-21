@@ -1,6 +1,6 @@
 import { SnackbarProvider } from "notistack";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ContactList } from "./components/contact-list";
+import { ContactList } from "./components/contact-list/contact-list";
 
 const queryClient = new QueryClient();
 

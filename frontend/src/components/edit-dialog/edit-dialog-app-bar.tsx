@@ -1,12 +1,12 @@
 import { Close } from "@mui/icons-material";
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material";
 
-type TAddDialogAppBarProps = {
+type TEditDialogAppBarProps = {
   setIsOpen: (open: boolean) => void;
   handleSave: () => void;
 };
 
-export const AddDialogAppBar = (props: TAddDialogAppBarProps) => {
+export const EditDialogAppBar = (props: TEditDialogAppBarProps) => {
   return (
     <AppBar sx={{ position: "relative" }}>
       <Toolbar>

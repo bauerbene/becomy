@@ -1,8 +1,8 @@
 import { Box, Button } from "@mui/material";
-import { useContactQuery } from "../query/use-contact-query";
 import { ContactListItem } from "./contact-list-item";
 import { useState } from "react";
-import { AddDialog } from "./add-dialog";
+import { useContactQuery } from "../../query/use-contact-query";
+import { EditDialog } from "../edit-dialog/edit-dialog";
 
 export const ContactList = () => {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
@@ -31,7 +31,7 @@ export const ContactList = () => {
       >
         Add
       </Button>
-      <AddDialog isOpen={isAddDialogOpen} setIsOpen={setIsAddDialogOpen} />
+      <EditDialog isOpen={isAddDialogOpen} setIsOpen={setIsAddDialogOpen} />
     </Box>
   );
 };

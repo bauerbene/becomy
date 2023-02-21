@@ -13,7 +13,7 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useQueryClient } from "react-query";
 import remarkGfm from "remark-gfm";
-import { AddDialog } from "./add-dialog";
+import { EditDialog } from "../edit-dialog/edit-dialog";
 import { ContactListItemHeader } from "./contact-list-item-header";
 
 type TContactListItemProps = {
@@ -115,7 +115,7 @@ export const ContactListItem = (props: TContactListItemProps) => {
           </ReactMarkdown>
         </AccordionDetails>
       </Accordion>
-      <AddDialog
+      <EditDialog
         isOpen={isEditDialogOpen}
         setIsOpen={setIsEditDialogOpen}
         first_name={props.firstName}

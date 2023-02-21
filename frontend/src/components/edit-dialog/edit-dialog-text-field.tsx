@@ -1,12 +1,12 @@
 import { TextField } from "@mui/material";
 
-type TAddDialogTextField = {
+type TEditDialogTextField = {
   label: string;
   value?: string;
   setContent: (e: any) => void;
 };
 
-export const AddDialogTextField = (props: TAddDialogTextField) => {
+export const EditDialogTextField = (props: TEditDialogTextField) => {
   return (
     <TextField
       variant="outlined"

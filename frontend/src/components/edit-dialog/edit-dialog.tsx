@@ -3,8 +3,8 @@ import { TransitionProps } from "@mui/material/transitions";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
-import { AddDialogAppBar } from "./add-dialog-app-bar";
-import { AddDialogTextField } from "./add-dialog-text-field";
+import { EditDialogAppBar } from "./edit-dialog-app-bar";
+import { EditDialogTextField } from "./edit-dialog-text-field";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -15,7 +15,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-type TAddDialogProps = {
+type TEditDialogProps = {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   id?: number;
@@ -45,7 +45,7 @@ type UpdateContactRequest = {
   additional_data?: string;
 };
 
-export const AddDialog = (props: TAddDialogProps) => {
+export const EditDialog = (props: TEditDialogProps) => {
   const [firstName, setFirstName] = useState(props.first_name);
   const [lastName, setLastName] = useState(props.last_name);
   const [phone, setPhone] = useState(props.phone);
@@ -119,30 +119,30 @@ export const AddDialog = (props: TAddDialogProps) => {
 
   return (
     <Dialog open={props.isOpen} fullScreen TransitionComponent={Transition}>
-      <AddDialogAppBar setIsOpen={handleClose} handleSave={handleSave} />
+      <EditDialogAppBar setIsOpen={handleClose} handleSave={handleSave} />
       <DialogContent>
         <Box display="flex" flexDirection="column">
-          <AddDialogTextField
+          <EditDialogTextField
             label="First Name"
             setContent={(e) => setFirstName(e.target.value)}
             value={firstName}
           />
-          <AddDialogTextField
+          <EditDialogTextField
             label="Last Name"
             setContent={(e) => setLastName(e.target.value)}
             value={lastName}
           />
-          <AddDialogTextField
+          <EditDialogTextField
             label="Phone"
             setContent={(e) => setPhone(e.target.value)}
             value={phone}
           />
-          <AddDialogTextField
+          <EditDialogTextField
             label="Email"
             setContent={(e) => setEmail(e.target.value)}
             value={email}
           />
-          <AddDialogTextField
+          <EditDialogTextField
             label="Birthday"
             setContent={(e) => setBirthday(e.target.value)}
             value={birthday}
