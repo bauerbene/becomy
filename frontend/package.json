@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "copy-dist-to-static": "cp -r ./dist/ ../backend/static/"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
