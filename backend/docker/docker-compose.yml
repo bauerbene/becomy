@@ -1,7 +1,13 @@
-
-version: '3.5'
+version: "3.5"
 
 services:
+  becomy_web:
+    container_name: becomy_web
+    build: ./..
+    ports:
+      - "5005:8080"
+    networks:
+      - becomy
   postgres:
     container_name: becomy_db
     image: postgres
@@ -11,16 +17,15 @@ services:
       POSTGRES_DB: becomy
       PGDATA: /data/postgres
     volumes:
-       - postgres:/data/postgres
+      - postgres:/data/postgres
     ports:
       - "5432:5432"
-    networks:
-      - postgres
     restart: unless-stopped
+    networks:
+      - becomy
 
 networks:
-  postgres:
-    driver: bridge
+  becomy: {}
 
 volumes:
-    postgres:
+  postgres:
