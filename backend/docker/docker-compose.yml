@@ -8,7 +8,10 @@ services:
       - "5005:8080"
     networks:
       - becomy
-  postgres:
+    environment:
+      - DATABASE_URL=postgresql://becomy_db_user:becomy_db_password@becomy_db:5432/becomy
+
+  postgres_becomy:
     container_name: becomy_db
     image: postgres
     environment:
@@ -17,9 +20,9 @@ services:
       POSTGRES_DB: becomy
       PGDATA: /data/postgres
     volumes:
-      - postgres:/data/postgres
+      - postgres_becomy:/data/postgres
     ports:
-      - "5432:5432"
+      - "5006:5432"
     restart: unless-stopped
     networks:
       - becomy
@@ -28,4 +31,4 @@ networks:
   becomy: {}
 
 volumes:
-  postgres:
+  postgres_becomy:

@@ -41,7 +41,7 @@ export const ContactListItem = (props: TContactListItemProps) => {
       },
     };
     fetch(
-      `http://localhost:8080/api/contact/delete/${props.id}`,
+      `${import.meta.env.VITE_API_URL}/api/contact/delete/${props.id}`,
       requestOptions
     )
       .then(() => {

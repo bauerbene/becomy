@@ -1,0 +1,24 @@
+version: "3.5"
+
+services:
+  postgres_becomy_dev:
+    container_name: becomy_dev_db
+    image: postgres
+    environment:
+      POSTGRES_USER: becomy_db_user
+      POSTGRES_PASSWORD: becomy_db_password
+      POSTGRES_DB: becomy
+      PGDATA: /data/postgres
+    volumes:
+      - postgres_becomy_dev:/data/postgres
+    ports:
+      - "5007:5432"
+    restart: unless-stopped
+    networks:
+      - becomy_dev
+
+networks:
+  becomy_dev: {}
+
+volumes:
+  postgres_becomy_dev:

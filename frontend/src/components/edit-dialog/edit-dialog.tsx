@@ -99,7 +99,7 @@ export const EditDialog = (props: TEditDialogProps) => {
       },
       body: JSON.stringify(request),
     };
-    fetch(`http://localhost:8080${api_path}`, requestOptions)
+    fetch(`${import.meta.env.VITE_API_URL}${api_path}`, requestOptions)
       .then(() => {
         queryClient.invalidateQueries({ queryKey: ["contactQuery"] });
         handleClose(false);

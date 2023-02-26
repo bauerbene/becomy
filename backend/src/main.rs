@@ -8,5 +8,5 @@ use crate::startup::server_config::configure_and_start_server;
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let db_pool = configure_database().await;
-    configure_and_start_server(("127.0.0.1", 8080), db_pool).await
+    configure_and_start_server(("0.0.0.0", 8080), db_pool).await
 }

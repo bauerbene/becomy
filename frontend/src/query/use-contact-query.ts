@@ -13,7 +13,10 @@ export type TContactsResponse = {
 export const useContactQuery = () => {
   const { isLoading, error, data } = useQuery<TContactsResponse[]>(
     "contactQuery",
-    () => fetch("http://localhost:8080/api/contact").then((res) => res.json())
+    () =>
+      fetch(`${import.meta.env.VITE_API_URL}/api/contact`).then((res) =>
+        res.json()
+      )
   );
 
   return { isLoading, error, data };
